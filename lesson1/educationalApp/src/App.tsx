@@ -1,4 +1,5 @@
 import Counter from "./components/Counter"
+import Dice from "./components/Dice"
 import SelfCheckout from "./components/SelfCheckout"
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <>
       <Counter/>
       <SelfCheckout/>
+      <Dice/>
     </>
   )
 }

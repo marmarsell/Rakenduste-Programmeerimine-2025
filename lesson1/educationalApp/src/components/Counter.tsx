@@ -6,7 +6,7 @@ function Counter() {
   const [increment, setIncrement] = useState(1)
 
   function incrementChange() {
-    setIncrement(parseInt(document.getElementById("increment-selector").value, 10))
+    setIncrement(parseInt((document.getElementById("increment-selector") as HTMLInputElement) !.value));
   }
 
   return (

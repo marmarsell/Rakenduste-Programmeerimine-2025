@@ -1,4 +1,4 @@
-import "../App.css"
+import "./SelfCheckout.css"
 
 function selfCheckout(){
 
@@ -11,7 +11,7 @@ function selfCheckout(){
           
             <h3>kontakt: marsell@tlu.ee</h3> <input type="text" defaultValue={"i don't bite"}/>
             <button>"Call to Action"</button>
-            
+
         </div>
     </>
   )
