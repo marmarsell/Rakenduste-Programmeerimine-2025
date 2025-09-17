@@ -16,6 +16,7 @@ function Counter() {
         <button onClick={() => setCount(count => count + increment)}>
           count is {count}
         </button>
+
         <select name="increment" id="increment-selector" defaultValue={1} onChange={() => incrementChange()}>
           <option value="100">+100</option>
           <option value="50">+50</option>
@@ -26,6 +27,7 @@ function Counter() {
           <option value="-50">-50</option>
           <option value="-100">-100</option>
         </select>
+
       </div>
     </>
   )
