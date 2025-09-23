@@ -1,16 +1,23 @@
-import * as React from 'react'
-import Button from "@mui/material/Button"
+import Header from './components/Header'
 import './App.css'
 
+import About from './components/About'
+import Home from './components/Home'
+import { Route, Routes } from 'react-router'
+import Something from './components/Something'
+
 function App() {
-  const [count, setCount] = React.useState(0)
 
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button onClick={() => setCount((count) => count + 1)} variant='contained'>Count is {count}</Button>
-      </div>
+      <Header />
+      <Routes>
+        <Route path='home' element={<Home />} />
+
+        <Route path='about' element={<About />} />
+
+        <Route path="sumthin'" element={<><Something /><Header/></>} />
+      </Routes>
     </>
   )
 }

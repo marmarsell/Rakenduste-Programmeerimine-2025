@@ -2,7 +2,7 @@ function Home() {
 
     return(
         <>
-            <div>Site 1 thingus</div>
+            <div>Site homepage thingus</div>
         </>
     )
 }
