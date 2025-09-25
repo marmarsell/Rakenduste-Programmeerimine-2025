@@ -2,12 +2,14 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
-  res.send('Marsell Survived hehe')
-})
+const catsRoutes = require("./routes/cats.routes");
 
-app.get("/goober", (eq, res) =>{
-  res.send("GOOBERNATOR")
+app.use(express.json());
+
+app.use("/cats", catsRoutes);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
 })
 
 app.listen(port, () => {
