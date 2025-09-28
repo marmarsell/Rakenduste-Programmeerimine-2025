@@ -19,7 +19,7 @@ const cats = [
 exports.create = (req, res) => {
     const { name } = req.body
 
-    console.log(name);
+    console.log(name + " added to list");
     //console.log(req.body.name)
     res.sendStatus(200);
 };
@@ -28,6 +28,14 @@ exports.read = (req, res) => {
     res.send(cats);
 };
 
-exports.update = (req, res) => {};
+exports.update = (req, res) => {
+    res.send(cats);
+    res.sendStatus(200);
+};
 
-exports.delete = (req, res) => {};
+exports.delete = (req, res) => {
+  const { name } = req.body
+
+  console.log("deleted " + name)
+  res.sendStatus(200)
+};
