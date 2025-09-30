@@ -32,9 +32,21 @@ function App() {
     }
   })
 
+  const tweakedArray = [] as Array<Note>
+
   const [name, setName] = useState<string>()
   const [content, setContent] = useState<string>()
 
+  notes?.forEach(element => {
+    if(element.active == true) {
+      tweakedArray.push(element)
+    }
+    else {
+      element.content = "task inactive"
+      tweakedArray.push(element)
+    }
+  });
+  
   function beginSubmission() {
     const saved = localStorage.getItem("notesList")
     const noteArray = JSON.parse(saved as string) as Array<Note>
@@ -54,7 +66,14 @@ function App() {
   function deactivitinator(disablableID: number) {
     const saved = localStorage.getItem("notesList")
     const noteArray = JSON.parse(saved as string) as Array<Note>
-    noteArray[disablableID].active = false
+
+    if(noteArray[disablableID].active == true) {
+      noteArray[disablableID].active = false
+    }
+    else {
+      noteArray[disablableID].active = true
+    }
+    
     localStorage.setItem("notesList", JSON.stringify(noteArray))
     window.location.reload()
   }
@@ -84,18 +103,14 @@ function App() {
 
       <div>
         <hr />
-        {notes?.map((notes, index) => (
+        {tweakedArray?.map((notes, index) => (
           <div>
             <hr />
             <div key={index}>
-              {notes.name} <a onClick={() => deactivitinator(index)}>disable</a>
+              {notes.name} <a onClick={() => deactivitinator(index)}>toggle</a>
               <hr />
-              <div>
-                {notes.content}
-              </div>
-              <button onClick={() => beginDeletion(index)}>
-                yoink  
-              </button>
+              <div>{notes.content}</div>
+              <button onClick={() => beginDeletion(index)}>yoink</button>
               <hr />
             </div>
           </div>
