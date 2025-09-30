@@ -1,33 +1,107 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  type Note = {
+    name: string
+    content: string
+
+    active: boolean
+  }
+
+  const devName = "marsell"
+
+  const [notes, setNotes] = useState(() => {
+    if(localStorage.getItem("notesList") != null) {
+      const saved = localStorage.getItem("notesList")
+      return JSON.parse(saved as string) as Array<Note>
+
+    }
+    else {
+      localStorage.setItem("notesList", JSON.stringify(
+        [
+          {
+            name: "test", 
+            content: "lorem ipsum wawawawaw",
+
+            active: true
+          }
+        ]
+      ))
+    }
+  })
+
+  const [name, setName] = useState<string>()
+  const [content, setContent] = useState<string>()
+
+  function beginSubmission() {
+    const saved = localStorage.getItem("notesList")
+    const noteArray = JSON.parse(saved as string) as Array<Note>
+    noteArray.push({name: name as string, content: content as string, active: true})
+    localStorage.setItem("notesList", JSON.stringify(noteArray))
+    window.location.reload()
+  }
+
+  function beginDeletion(deletableID: number) {
+    const saved = localStorage.getItem("notesList")
+    const noteArray = JSON.parse(saved as string) as Array<Note>
+    noteArray.splice(deletableID, 1)
+    localStorage.setItem("notesList", JSON.stringify(noteArray))
+    window.location.reload()
+  }
+
+  function deactivitinator(disablableID: number) {
+    const saved = localStorage.getItem("notesList")
+    const noteArray = JSON.parse(saved as string) as Array<Note>
+    noteArray[disablableID].active = false
+    localStorage.setItem("notesList", JSON.stringify(noteArray))
+    window.location.reload()
+  }
+
+  useEffect(() => {
+    localStorage.setItem("devName", JSON.stringify(devName))
+  }, [devName])
 
   return (
     <>
+      <title>Admin Panel :3</title>
+      <h1>TODO LIST :3</h1>
+
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <input 
+          type="text" 
+          onChange={(e) => setName(e.target.value)} placeholder={"name"}
+        /> <input 
+          type="text" 
+          onChange={(e) => setContent(e.target.value)} placeholder={"content"}
+        /> <button onClick={() => beginSubmission()}>
+          submit :3c
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <br />
+
+      <div>
+        <hr />
+        {notes?.map((notes, index) => (
+          <div>
+            <hr />
+            <div key={index}>
+              {notes.name} <a onClick={() => deactivitinator(index)}>disable</a>
+              <hr />
+              <div>
+                {notes.content}
+              </div>
+              <button onClick={() => beginDeletion(index)}>
+                yoink  
+              </button>
+              <hr />
+            </div>
+          </div>
+        ))}
+        <hr />
+      </div>
     </>
   )
 }

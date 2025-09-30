@@ -11,7 +11,7 @@ app.use(express.json());
 app.use("/todo", todoRoutes);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send(':3')
 })
 
 app.listen(port, () => {
