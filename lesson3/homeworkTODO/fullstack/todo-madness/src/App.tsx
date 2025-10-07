@@ -85,7 +85,8 @@ function App() {
   return (
     <>
       <title>Admin Panel :3</title>
-      <h1>TODO LIST :3</h1>
+      <h1 className='text-3x1 font-bold underline'>TODO LIST :3</h1>
+      <br />
 
       <div>
         <input 
@@ -109,7 +110,9 @@ function App() {
             <div key={index}>
               {notes.name} <a onClick={() => deactivitinator(index)}>toggle</a>
               <hr />
+              <br />
               <div>{notes.content}</div>
+              <br />
               <button onClick={() => beginDeletion(index)}>yoink</button>
               <hr />
             </div>
